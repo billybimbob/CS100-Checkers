@@ -1,10 +1,17 @@
 package submissions;
-import checkers.*;
+import checkers.CheckersConstants;
+import checkers.Evaluator;
+
 // Charlie - kings more and sides on other side more
 public class TeamC implements Evaluator {
+
 	@Override
 	public String getName() {
 		return "Charlie";
+	}
+	@Override
+	public int getSection() {
+		return 3;
 	}
 
 	@Override

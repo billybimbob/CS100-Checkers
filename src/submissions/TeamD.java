@@ -1,10 +1,17 @@
 package submissions;
-import checkers.*;
+import checkers.CheckersConstants;
+import checkers.Evaluator;
+
 //Delta - kings more and regular pieces getting closer to kings are worth more
 public class TeamD implements Evaluator {
+
 	@Override
 	public String getName() {
 		return "Delta";
+	}
+	@Override
+	public int getSection() {
+		return 7;
 	}
 
 	@Override

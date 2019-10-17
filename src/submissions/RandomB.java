@@ -1,9 +1,15 @@
 package submissions;
-import checkers.*;
+import checkers.Evaluator;
+
 public class RandomB implements Evaluator {
+
 	@Override
 	public String getName() {
 		return "Random B";
+	}
+	@Override
+	public int getSection() {
+		return 1;
 	}
 
 	@Override

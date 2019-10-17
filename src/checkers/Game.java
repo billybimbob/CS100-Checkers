@@ -7,10 +7,10 @@ public class Game {
 	private Evaluator blackPlayer, whitePlayer;
 
 	public Game(Board newBoard, int newBLACKdepth, int newWHITEdepth, boolean newDisplay, Evaluator newBlackPlayer, Evaluator newWhitePlayer) {
-		b=newBoard;
-		display=newDisplay;
-		blackPlayer=newBlackPlayer;
-		whitePlayer=newWhitePlayer;
+		b = newBoard;
+		display = newDisplay;
+		blackPlayer = newBlackPlayer;
+		whitePlayer = newWhitePlayer;
 		if (newBLACKdepth>0) BLACKdepth=newBLACKdepth;
 		else BLACKdepth=6;
 		if (newWHITEdepth>0) WHITEdepth=newWHITEdepth;
@@ -73,8 +73,8 @@ public class Game {
 	}
 
 	public int minmaxR(int whoseMove, int level, int turn) {
-		ArrayList<Move> possible_moves;
-		ArrayList<Integer> scores = new ArrayList<Integer>();
+		List<Move> possible_moves;
+		List<Integer> scores = new ArrayList<>();
 		String blackTeam=blackPlayer.getName();
 		String whiteTeam=whitePlayer.getName();
 		int best=Integer.MIN_VALUE, current=Integer.MIN_VALUE, worst=Integer.MAX_VALUE;

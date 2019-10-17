@@ -1,10 +1,16 @@
 package submissions;
-import checkers.*;
+import checkers.CheckersConstants;
+import checkers.Evaluator;
 // Alpha - kings more
 public class TeamA implements Evaluator {
+	
 	@Override
 	public String getName() {
 		return "Alpha";
+	}
+	@Override
+	public int getSection() {
+		return 3;
 	}
 
 	@Override

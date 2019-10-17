@@ -1,9 +1,11 @@
 package checkers;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class Tournament {
 	public static String [] classTeams = {"TeamA","TeamB","TeamC","TeamD"};
-	public static ArrayList<String> teams = new ArrayList<String>(Arrays.asList(classTeams));
+	public static List<String> teams = new ArrayList<>(Arrays.asList(classTeams));
 	public static int[][] results = new int[teams.size()][teams.size()];
 	
 	public static void main(String[] args) {
@@ -17,10 +19,10 @@ public class Tournament {
 					String t2=teams.get(jj);
 					win1=0;
 					win2=0;
-					Class t1class = Class.forName("submissions." + t1),
-						  t2class = Class.forName("submissions." + t2);
-	                Evaluator t1eval = (Evaluator) t1class.getConstructor().newInstance(),
-	                		  t2eval = (Evaluator) t2class.getConstructor().newInstance();
+
+					Evaluator[] evals = Play.getEvaluators(t1, t2);
+					
+					Evaluator t1eval = evals[0], t2eval = evals[1];
 	                String player1=t1eval.getName();
 	                String player2=t2eval.getName();
 	                

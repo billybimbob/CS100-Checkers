@@ -224,7 +224,7 @@ public class Board {
 	}	
 	
 	public void unmake_move(Move m) {
-		ArrayList<Move> moveList = new ArrayList<Move>();
+		List<Move> moveList = new ArrayList<>();
 		while (m != null) {
 			moveList.add(m);
 			m=m.getNextMove();

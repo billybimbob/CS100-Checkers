@@ -1,10 +1,16 @@
 package submissions;
-import checkers.*;
+import checkers.CheckersConstants;
+import checkers.Evaluator;
 // Bravo - just count
 public class TeamB implements Evaluator {
+
 	@Override
 	public String getName() {
 		return "Bravo";
+	}
+	@Override
+	public int getSection() {
+		return 5;
 	}
 
 	@Override
