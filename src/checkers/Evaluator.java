@@ -1,5 +1,7 @@
 package checkers;
+
 public interface Evaluator {
+  
   public String getName();
 
   public int getSection();

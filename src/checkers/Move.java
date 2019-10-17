@@ -1,4 +1,5 @@
 package checkers;
+
 public class Move {
 	private int fx, fy;	// FROM row, FROM column
 	private int tx, ty;	// TO row, TO column
