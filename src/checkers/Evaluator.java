@@ -1,12 +1,25 @@
 package checkers;
 
-public interface Evaluator {
+interface Evaluator {
   
-  public String getName();
+  /**
+   * changes the color the Evaluator is playing as
+   * @param color the new color
+   */
+  void setColor(int color); //should only be called in Game class
 
-  public int getSection();
+  String getName();
 
-  public int evaluateBlack(char [][] position);
+  int getSection();
 
-  public int evaluateWhite(char [][] position);
+  /**
+   * analyzes the board and gives a score to the board;
+   * a higher value means the board is more in favor 
+   * for the Evaluator's color; a lower value means
+   * the board is not in favor for the Evaluator's color
+   * @param board the board being analyzed
+   * @return the score of the board
+   */
+  int evaluateBoard (char[][] board);
+
 }

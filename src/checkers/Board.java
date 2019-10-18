@@ -1,5 +1,6 @@
 package checkers;
 import java.util.*;
+
 public class Board {
 	private char [][] position;
 
@@ -289,7 +290,7 @@ public class Board {
 	}
 
 	public boolean end_game(int player) {
-		ArrayList<Move> data=find_moves(player);
+		List<Move> data=find_moves(player);
 		if (data.isEmpty()) return true;
 		else return false;
 	}

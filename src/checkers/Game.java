@@ -1,9 +1,12 @@
 package checkers;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import static checkers.CheckersConstants.*;
+
 public class Game {
 	private Board b;
 	private int BLACKdepth, WHITEdepth;
-	private boolean display=false;
+	private boolean display = false;
 	private Evaluator blackPlayer, whitePlayer;
 
 	public Game(Board newBoard, int newBLACKdepth, int newWHITEdepth, boolean newDisplay, Evaluator newBlackPlayer, Evaluator newWhitePlayer) {
@@ -11,10 +14,13 @@ public class Game {
 		display = newDisplay;
 		blackPlayer = newBlackPlayer;
 		whitePlayer = newWhitePlayer;
-		if (newBLACKdepth>0) BLACKdepth=newBLACKdepth;
-		else BLACKdepth=6;
-		if (newWHITEdepth>0) WHITEdepth=newWHITEdepth;
-		else WHITEdepth=6;
+		blackPlayer.setColor(BLACK);
+		whitePlayer.setColor(WHITE);
+
+		if (newBLACKdepth > 0) BLACKdepth = newBLACKdepth;
+		else BLACKdepth = 6;
+		if (newWHITEdepth > 0) WHITEdepth = newWHITEdepth;
+		else WHITEdepth = 6;
 	}
 
 	public void	comp_move(int turn) {
@@ -36,8 +42,8 @@ public class Game {
 	}
 
 	public Move minmax(int whoseMove, int level, int turn) {
-		ArrayList<Move> possible_moves;
-		ArrayList<Integer> scores = new ArrayList<Integer>();
+		List<Move> possible_moves;
+		List<Integer> scores = new ArrayList<>();
 		Move chosenMove;
 		int best=Integer.MIN_VALUE, current=Integer.MIN_VALUE, worst=Integer.MAX_VALUE;
 
@@ -87,13 +93,14 @@ public class Game {
 //		if (level == 0) return b.evaluate(whoseMove, blackTeam, whiteTeam);
 
 		if (level == 0) {
-			if (whoseMove==CheckersConstants.BLACK && whoseMove==turn)
-				return blackPlayer.evaluateBlack(b.BoardCopy());
-			else if (whoseMove==CheckersConstants.BLACK && whoseMove!=turn)
-				return whitePlayer.evaluateWhite(b.BoardCopy());
-			else if (whoseMove==CheckersConstants.WHITE && whoseMove==turn)
-				return whitePlayer.evaluateWhite(b.BoardCopy());
-			else return blackPlayer.evaluateBlack(b.BoardCopy());
+			if (whoseMove==BLACK && whoseMove==turn)
+				return blackPlayer.evaluateBoard(b.BoardCopy());
+			else if (whoseMove==BLACK && whoseMove!=turn)
+				return whitePlayer.evaluateBoard(b.BoardCopy());
+			else if (whoseMove==WHITE && whoseMove==turn)
+				return whitePlayer.evaluateBoard(b.BoardCopy());
+			else
+				return blackPlayer.evaluateBoard(b.BoardCopy());
 		}
 		
 		else {

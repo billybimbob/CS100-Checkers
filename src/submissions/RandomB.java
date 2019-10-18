@@ -1,23 +1,16 @@
 package submissions;
-import checkers.Evaluator;
+import checkers.AbstractEvaluator;
 
-public class RandomB implements Evaluator {
-
-	@Override
-	public String getName() {
-		return "Random B";
-	}
-	@Override
-	public int getSection() {
-		return 1;
+public class RandomB extends AbstractEvaluator {
+	
+	public RandomB() {
+		super.name = "Random B";
+		super.section = 1;
 	}
 
 	@Override
-	public int evaluateWhite(char [][] position) { 
-		return (int)(Math.random()*100)-50;
-	}
-
-	@Override
-	public int evaluateBlack(char [][] position){
+	public int evaluateBoard(char [][] position) { 
 		return (int)(Math.random()*100-50);
-	}}
+	}
+
+}

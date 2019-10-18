@@ -1,66 +1,47 @@
 package submissions;
-import checkers.CheckersConstants;
-import checkers.Evaluator;
+import checkers.AbstractEvaluator;
 
 //Delta - kings more and regular pieces getting closer to kings are worth more
-public class TeamD implements Evaluator {
+public class TeamD extends AbstractEvaluator {
+
+    
+    /**
+     * have values
+     * ownChecker: own regular checker pieces
+     * ownKing:    own king checker pieces
+     * oppChecker: opponent's regular checker pieces
+     * oppKing:    opponent's king checker pieces
+     */
+
+    public TeamD() {
+        super.name = "Delta";
+        super.section = 7;
+    }
 
 	@Override
-	public String getName() {
-		return "Delta";
-	}
-	@Override
-	public int getSection() {
-		return 7;
-	}
-
-	@Override
-	public int evaluateBlack(char [][] position) { 
+	public int evaluateBoard (char [][] position) { 
 		int value=0, i, j;
 		for (i=1;i<=8;i++) {
 			for (j=1;j<=8;j++) {
-				if (position[i][j] == CheckersConstants.WCHEC) value=value-3;
-				if (position[i][j] == CheckersConstants.WKING) value=value-5;
-				if (position[i][j] == CheckersConstants.BCHEC) value=value+3;
-				if (position[i][j] == CheckersConstants.BKING) value=value+5;
+				char spot = position[i][j];
+				if (super.oppChecker(spot)) value -= 3;
+				if (super.oppKing(spot))    value -= 5;
+				if (super.ownChecker(spot)) value += 3;
+				if (super.ownKing(spot))    value += 5;
 			}
 		}
 		value=value*100;
 		for (i=2;i<=5;i++) {
 			for (j=1;j<=8;j++) {
-				if (position[i][j] == CheckersConstants.BCHEC) value=value+(8-i);
+				if (super.oppChecker(position[i][j])) value += (8-i);
 			}
 		}
 		for (i=4;i<=7;i++) {
 			for (j=1;j<=8;j++) {
-				if (position[i][j] == CheckersConstants.WCHEC) value=value-i;
+				if (super.ownChecker(position[i][j])) value -= i;
 			}
 		}		
 		return value*100+(int)(Math.random()*10);
 	}
 
-  	@Override
-  	public int evaluateWhite(char [][] position) { 
-		int value=0, i, j;
-		for (i=1;i<=8;i++) {
-			for (j=1;j<=8;j++) {
-				if (position[i][j] == CheckersConstants.WCHEC) value=value+3;
-				if (position[i][j] == CheckersConstants.WKING) value=value+5;
-				if (position[i][j] == CheckersConstants.BCHEC) value=value-3;
-				if (position[i][j] == CheckersConstants.BKING) value=value-5;
-			}
-		}
-		value=value*100;
-		for (i=2;i<=5;i++) {
-			for (j=1;j<=8;j++) {
-				if (position[i][j] == CheckersConstants.BCHEC) value=value-(8-i);
-			}
-		}
-		for (i=4;i<=7;i++) {
-			for (j=1;j<=8;j++) {
-				if (position[i][j] == CheckersConstants.WCHEC) value=value+i;
-			}
-		}		
-		return value*100+(int)(Math.random()*10);
-	}
 }
