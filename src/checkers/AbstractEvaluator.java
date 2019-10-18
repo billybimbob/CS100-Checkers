@@ -36,12 +36,42 @@ public abstract class AbstractEvaluator implements Evaluator {
         }
     }
 
-    //evaluate helper methods
-    protected final boolean ownChecker(char check) { return ownChec == check; }
-    protected final boolean oppChecker(char check) { return oppChec == check; }
+    /*
+     * evaluate helper methods
+     */
 
-    protected final boolean ownKing(char check) { return ownKing == check; }
-    protected final boolean oppKing(char check) { return oppKing == check; }
+    /**
+     * checks if tile has a checker that is the same
+     * color as the Evaluator's color
+     * @param tile
+     * @return {@code true} tile has a checker piece and is same color
+     */
+    protected final boolean ownChecker(char tile) { return ownChec == tile; }
+
+    /**
+     * checks if tile has a checker that is the not
+     * the same color as the Evaluator's color
+     * @param tile
+     * @return {@code true} tile has a checker piece and is different color
+     */
+    protected final boolean oppChecker(char tile) { return oppChec == tile; }
+
+    /**
+     * checks if tile has a king piece that is the same
+     * as the Evaluator's color
+     * @param tile
+     * @return {@code true} tile has a king piece and is the same color
+     */
+    protected final boolean ownKing(char tile) { return ownKing == tile; }
+
+    /**
+     * checks if tile has a king piece that is not the 
+     * same as the Evaluator's color
+     * @param tile
+     * @return {@code true} tile has a king piece and is different color
+     */
+    protected final boolean oppKing(char tile) { return oppKing == tile; }
+
 
     @Override
     public abstract int evaluateBoard (char[][] board);

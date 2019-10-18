@@ -4,7 +4,7 @@ import checkers.AbstractEvaluator;
 // Student skeleton
 public class Name extends AbstractEvaluator {
 	
-	/**
+    /**
      * have values
      * ownChecker: own regular checker pieces
      * ownKing:    own king checker pieces

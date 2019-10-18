@@ -4,7 +4,6 @@ import checkers.AbstractEvaluator;
 //Delta - kings more and regular pieces getting closer to kings are worth more
 public class TeamD extends AbstractEvaluator {
 
-    
     /**
      * have values
      * ownChecker: own regular checker pieces
