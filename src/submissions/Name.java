@@ -1,15 +1,19 @@
 package submissions;
 import checkers.AbstractEvaluator;
 
-// Student skeleton
+/**
+ * student skeleton
+ * change Class name to first initial, last name
+ * e.g. student Bob Smith -> BSmith
+ */
 public class Name extends AbstractEvaluator {
 
-    /**
-     * have values
-     * ownChecker: own regular checker pieces
-     * ownKing:    own king checker pieces
-     * oppChecker: opponent's regular checker pieces
-     * oppKing:    opponent's king checker pieces
+    /*
+     * have methods
+     * ownChecker(char): own regular checker pieces
+     * ownKing(char):    own king checker pieces
+     * oppChecker(char): opponent's regular checker pieces
+     * oppKing(char):    opponent's king checker pieces
      */
 
     public Name() {
@@ -19,7 +23,7 @@ public class Name extends AbstractEvaluator {
     }
 
     @Override
-    public int evaluateBoard(char [][] position) {
+    public int evaluateBoard(char [][] board) {
 
         //change the code here
 

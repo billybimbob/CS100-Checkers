@@ -1,12 +1,23 @@
 package checkers;
+
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
+/**
+ * In order to run tournament, 2 requirements are needed:
+ * <ol>
+ * <li> submission class files in a {@code submmissions.txt} file
+ * <li> have a submissions.txt file that contains all the submission class
+ * file names (without any file extensions or director path)
+ * </ol>
+ */
 public class Tournament {
-    public static String [] classTeams = {"TeamA","TeamB","TeamC","TeamD"};
-    public static List<String> teams = new ArrayList<>(Arrays.asList(classTeams));
-    public static int[][] results = new int[teams.size()][teams.size()];
+    //public static String [] classTeams = {"TeamA","TeamB","TeamC","TeamD"};
+    public static List<String> teams = new ArrayList<>();
+    public static int[][] results;
     
     public static void main(String[] args) {
         boolean display=false;
@@ -19,6 +30,9 @@ public class Tournament {
         try {
             int win1, win2;
             int[] wins;
+
+            addSubmissions();
+            results = new int[teams.size()][teams.size()];
 
             for (int ii=0; ii<teams.size(); ii++) {
                 for (int jj=ii+1; jj<teams.size(); jj++) {
@@ -44,8 +58,22 @@ public class Tournament {
                 }
                 System.out.print(t1+" totalWins="+rowTotal+"\n");
             }
+
         } catch (ReflectiveOperationException e) {
             e.printStackTrace();
+        } catch (IOException e) {
+            System.err.println("Issue reading flie");
+            e.printStackTrace();
+        }
+    }
+
+    public static void addSubmissions() throws IOException {
+        try (BufferedReader reader = new BufferedReader(new FileReader("submissions.txt"))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                teams.add(line); //line should have just file name
+            }
+
         }
     }
 }

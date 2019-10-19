@@ -5,12 +5,13 @@ import static checkers.CheckersConstants.WHITE;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 public class Play {
-    
-    public static String [] classTeams = {"RandomA", "RandomB"}; // List your class names here
-    public static List<String> teams = new ArrayList<>(Arrays.asList(classTeams));
-    
+
+     // List your class names here
+    public static List<String> teams = new ArrayList<>(Arrays.asList("RandomA", "RandomB"));
+
     public static void main(String[] args) {
         boolean display = false;  // display the board after every move
         for (String arg: args)
@@ -25,9 +26,9 @@ public class Play {
 
             Evaluator[] evals = getEvaluators(t1, t2);
             Evaluator t1eval = evals[0], t2eval = evals[1];
-            
+
             playGames(display, t1eval, t2eval);
-               
+
         } catch (ReflectiveOperationException e) {
             e.printStackTrace();
         }
@@ -45,7 +46,7 @@ public class Play {
     }
 
     /**
-     * @return first idx is eval1, second idx is eval2
+     * @return first idx is eval1 wins, second idx is eval2
      */
     public static int[] playGames (boolean display, Evaluator eval1, Evaluator eval2)
     {
@@ -53,22 +54,22 @@ public class Play {
         // depth must be an even number
         // totalMoves is how long it plays until a tie is declared
         // totalGames must be divisible by 4
-        int depth=4, totalMoves=150, totalGames=4, win1=0, win2=0;
+        int depth=6, totalMoves=150, totalGames=4, win1=0, win2=0;
         String player1 = eval1.getName();
         String player2 = eval2.getName();
-        
+
         int[] wins;
         int numRounds = totalGames/2;
-        
+
         /* play the game */
-        
-        System.out.println(player1 + " White Moves First");
+
+        System.out.println(player1 + "(White) Moves First");
         wins = runGame(numRounds, totalMoves, depth, display, eval2, eval1);
         win1 += wins[0]; win2 += wins[1];
-        
+
         System.out.println("\n\nHALFTIME: "+player1+"="+win1+"   "+player2+"="+win2);
 
-        System.out.println("\n"+player2 + " White Moves First");
+        System.out.println("\n"+player2 + "(White) Moves First");
         wins = runGame(numRounds, totalMoves, depth, display, eval1, eval2);
         win1 += wins[1]; win2 += wins[0];
 
@@ -90,37 +91,46 @@ public class Play {
             Board b = new Board();
             Game g = new Game(b, depth, depth, display, black, white);
             int counter = 0;
-            
+
             while(counter < maxMoves) {
                 if (b.end_game(WHITE)) {
-                    System.out.print(player1 + " Win  ");	
+                    System.out.print(player1 + " Win  ");
                     win1++;
                     break;
                 }
-                g.comp_move(WHITE);		
+                g.comp_move(WHITE);
                 counter++;
-                if (display) System.out.println(b);		
-                
+                if (display) printBoard(b);
+
                 if (b.end_game(BLACK)) {
-                    System.out.print(player2 + " Win  ");	
+                    System.out.print(player2 + " Win  ");
                     win2++;
                     break;
                 }
                 g.comp_move(BLACK);
                 counter++;
 
-                if (display){
-                    //System.out.print(String.format("\033[2J"));
-                    System.out.println(b);
-                }	
+                if (display) printBoard(b);
             }
 
-            if (counter==maxMoves) 
-                System.out.print("Tie:" 
-                    + player2 + "(" + b.checkerCount(BLACK) + ")" 
-                    + player1 + "(" + b.checkerCount(WHITE) + ")  ");	
+            if (counter==maxMoves)
+                System.out.print("Tie:"
+                    + player2 + "(" + b.checkerCount(BLACK) + ")"
+                    + player1 + "(" + b.checkerCount(WHITE) + ")  ");
         }
 
         return new int[] {win1, win2};
     }
+
+    private static void printBoard(Board board) {
+        try {
+            //System.out.print(String.format("\033[2J"));
+            System.out.println(board);
+            TimeUnit.SECONDS.sleep(1);
+            
+        } catch (InterruptedException e) {
+            System.out.println("Interrupted");
+            e.printStackTrace();
+        }
+    } 
 }

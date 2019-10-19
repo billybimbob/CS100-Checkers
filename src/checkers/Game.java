@@ -81,8 +81,8 @@ public class Game {
     public int minmaxR(int whoseMove, int level, int turn) {
         List<Move> possible_moves;
         List<Integer> scores = new ArrayList<>();
-        String blackTeam=blackPlayer.getName();
-        String whiteTeam=whitePlayer.getName();
+        //String blackTeam=blackPlayer.getName();
+        //String whiteTeam=whitePlayer.getName();
         int best=Integer.MIN_VALUE, current=Integer.MIN_VALUE, worst=Integer.MAX_VALUE;
 
         if (b.end_game(turn)) {	// turn player lost

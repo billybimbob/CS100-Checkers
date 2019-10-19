@@ -9,7 +9,7 @@ public class RandomB extends AbstractEvaluator {
     }
 
     @Override
-    public int evaluateBoard(char [][] position) { 
+    public int evaluateBoard(char [][] board) { 
         return (int)(Math.random()*100-50);
     }
 

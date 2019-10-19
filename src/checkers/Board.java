@@ -47,28 +47,16 @@ public class Board {
     public List<Move> find_moves(int turn) {
         List<Move> allMoves = new ArrayList<Move>();
         boolean jumpExists=false;
-        if (turn==BLACK) {
-            for (int i=1;i<=8;i++){
-                for (int j=1;j<=8;j++){
-                    if (position[i][j] == BCHEC || position[i][j] == BKING) {
-                        List<Move> oneCheckerMoves = find_moves(i,j);
-                        for (Move item: oneCheckerMoves) {
-                            if (item.getJump()) jumpExists=true; 
-                            allMoves.add(item);
-                        }
-                    }
-                }
-            }
-        }
-        else {
-            for (int i=1;i<=8;i++){
-                for (int j=1;j<=8;j++){
-                    if (position[i][j] == WCHEC || position[i][j] == WKING) {
-                        List<Move> oneCheckerMoves = find_moves(i,j);
-                        for (Move item: oneCheckerMoves){
-                            if (item.getJump()) jumpExists=true; 
-                            allMoves.add(item);
-                        }
+
+        char check = turn==BLACK ? BCHEC : WCHEC;
+        char king  = turn==BLACK ? BKING : WKING;
+        for (int i=1; i<=8; i++){
+            for (int j=1; j<=8; j++){
+                if (position[i][j] == check || position[i][j] == king) {
+                    List<Move> oneCheckerMoves = find_moves(i,j);
+                    for (Move item: oneCheckerMoves) {
+                        if (item.getJump()) jumpExists=true; 
+                        allMoves.add(item);
                     }
                 }
             }
