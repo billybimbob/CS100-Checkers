@@ -17,30 +17,30 @@ public class TeamD extends AbstractEvaluator {
         super.section = 7;
     }
 
-	@Override
-	public int evaluateBoard (char [][] position) { 
-		int value=0, i, j;
-		for (i=1;i<=8;i++) {
-			for (j=1;j<=8;j++) {
-				char spot = position[i][j];
-				if (super.oppChecker(spot)) value -= 3;
-				if (super.oppKing(spot))    value -= 5;
-				if (super.ownChecker(spot)) value += 3;
-				if (super.ownKing(spot))    value += 5;
-			}
-		}
-		value=value*100;
-		for (i=2;i<=5;i++) {
-			for (j=1;j<=8;j++) {
-				if (super.oppChecker(position[i][j])) value += (8-i);
-			}
-		}
-		for (i=4;i<=7;i++) {
-			for (j=1;j<=8;j++) {
-				if (super.ownChecker(position[i][j])) value -= i;
-			}
-		}		
-		return value*100+(int)(Math.random()*10);
-	}
+    @Override
+    public int evaluateBoard (char [][] position) {
+        int value=0, i, j;
+        for (i=1;i<=8;i++) {
+            for (j=1;j<=8;j++) {
+                char spot = position[i][j];
+                if (super.oppChecker(spot)) value -= 3;
+                if (super.oppKing(spot))    value -= 5;
+                if (super.ownChecker(spot)) value += 3;
+                if (super.ownKing(spot))    value += 5;
+            }
+        }
+        value=value*100;
+        for (i=2;i<=5;i++) {
+            for (j=1;j<=8;j++) {
+                if (super.oppChecker(position[i][j])) value += (8-i);
+            }
+        }
+        for (i=4;i<=7;i++) {
+            for (j=1;j<=8;j++) {
+                if (super.ownChecker(position[i][j])) value -= i;
+            }
+        }
+        return value*100+(int)(Math.random()*10);
+    }
 
 }

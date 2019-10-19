@@ -3,7 +3,7 @@ import checkers.AbstractEvaluator;
 
 // Student skeleton
 public class Name extends AbstractEvaluator {
-	
+
     /**
      * have values
      * ownChecker: own regular checker pieces
@@ -16,14 +16,14 @@ public class Name extends AbstractEvaluator {
         //change the values
         super.name = "Name"; //set equal to your name, first and last
         super.section = -1; //set equal to lab section
-	}
+    }
 
-	@Override
-	public int evaluateBoard(char [][] position) { 
-        
+    @Override
+    public int evaluateBoard(char [][] position) {
+
         //change the code here
-        
+
         return 1;
-	}
+    }
 
 }

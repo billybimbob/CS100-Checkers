@@ -65,7 +65,7 @@ public abstract class AbstractEvaluator implements Evaluator {
     protected final boolean ownKing(char tile) { return ownKing == tile; }
 
     /**
-     * checks if tile has a king piece that is not the 
+     * checks if tile has a king piece that is not the
      * same as the Evaluator's color
      * @param tile
      * @return {@code true} tile has a king piece and is different color
