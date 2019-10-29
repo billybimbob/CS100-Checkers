@@ -32,7 +32,7 @@ public class Play {
             parseArgs(args);
             addSubmissions();
             if (submissionTest == null)
-                throw new NoSuchFieldError("no submission file given");
+                throw new RuntimeException("no submission file given");
 
             String t1 = submissionTest;
             String t2 = teams.get( (int)(Math.random()*teams.size()) );
@@ -94,7 +94,12 @@ public class Play {
     }
 
     private static void printUsage() {
-
+        System.out.println(
+            "Usage: java checkers.Play [-hV] [-d <num>] -f <file>\n" + 
+            "-h         Print this help message.\n" +
+            "-V         Optional print out board after each move.\n" +
+            "-d <num>   Optional number of depth to search for possible moves.\n" +
+            "-f <file>  File submission testing\n");
     }
 
     protected static void addSubmissions(String name) throws IOException {

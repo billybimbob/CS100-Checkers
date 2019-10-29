@@ -97,7 +97,14 @@ public class Tournament extends Play {
     }
 
     private static void printUsage() {
-
+        System.out.println(
+            "Usage: java checkers.Play [-hV] [-d <num>] [-g <num>] [-m <num>] -s <file>\n" + 
+            "-h         Print this help message.\n" +
+            "-V         Optional print out board after each move.\n" +
+            "-d <num>   Optional number of depth to search for possible moves.\n" +
+            "-g <num>   Optional number of games played for each match.\n" +
+            "-m <num>   Optional number of moves until a tie is determined.\n" +
+            "-f <file>  Text file of all submissions\n");
     }
 
 }
