@@ -19,7 +19,7 @@ public class Name extends AbstractEvaluator {
     public Name() {
         //change the values
         super.name = "Name"; //set equal to your name, first and last
-        super.section = -1; //set equal to lab section
+        super.section = -1;  //set equal to lab section
     }
 
     @Override
@@ -27,7 +27,7 @@ public class Name extends AbstractEvaluator {
 
         //change the code here
 
-        return 1;
+        return 1; //return will be your board score 
     }
 
 }

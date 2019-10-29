@@ -1,47 +1,40 @@
 package checkers;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * In order to run tournament, 2 requirements are needed:
  * <ol>
- * <li> submission class files in a {@code submmissions.txt} file
+ * <li> submission class files located in {@code submissions} package
  * <li> have a submissions.txt file that contains all the submission class
- * file names (without any file extensions or director path)
+ * file names (without any file extensions or directory path)
  * </ol>
  */
-public class Tournament {
-    //public static String [] classTeams = {"TeamA","TeamB","TeamC","TeamD"};
-    public static List<String> teams = new ArrayList<>();
+public class Tournament extends Play {
+    
     public static int[][] results;
+    private static String submissions = null;
     
     public static void main(String[] args) {
-        boolean display=false;
-        for (String arg: args)
-            if (arg.equals("-v")) {
-                display = true;
-                break;
-            }
-
         try {
+            parseArgs(args);
+            addSubmissions(submissions);
+            if (submissions == null)
+                System.out.println("No submission file given, using default");
+
             int win1, win2;
             int[] wins;
 
-            addSubmissions();
             results = new int[teams.size()][teams.size()];
 
-            for (int ii=0; ii<teams.size(); ii++) {
-                for (int jj=ii+1; jj<teams.size(); jj++) {
+            for (int ii=0; ii < teams.size(); ii++) {
+                for (int jj=ii+1; jj < teams.size(); jj++) {
                     String t1=teams.get(ii);
                     String t2=teams.get(jj);
                     Evaluator[] evals = Play.getEvaluators(t1, t2);
                     Evaluator t1eval = evals[0], t2eval = evals[1];
 
-                    wins = Play.playGames(display, t1eval, t2eval);
+                    wins = Play.playGames(t1eval, t2eval);
                     win1 = wins[0]; win2 = wins[1];
 
                     results[ii][jj] = win1;
@@ -59,21 +52,52 @@ public class Tournament {
                 System.out.print(t1+" totalWins="+rowTotal+"\n");
             }
 
-        } catch (ReflectiveOperationException e) {
+            
+        } catch (RuntimeException e) {
             e.printStackTrace();
+            printUsage();
         } catch (IOException e) {
             System.err.println("Issue reading flie");
             e.printStackTrace();
+        } catch (ReflectiveOperationException e) {
+            e.printStackTrace();
         }
     }
 
-    public static void addSubmissions() throws IOException {
-        try (BufferedReader reader = new BufferedReader(new FileReader("submissions.txt"))) {
-            String line;
-            while ((line = reader.readLine()) != null) {
-                teams.add(line); //line should have just file name
+    protected static void parseArgs(String[] args) throws RuntimeException {
+        for (int i = 0; i < args.length; i++) {
+            String arg = args[i];
+
+            if (arg.charAt(0) == '-') {
+                for (char letter: arg.toCharArray()) //expect order of args match letter order
+                    switch(letter) {
+                        case 'd':
+                            depth = checkInt(x -> x%2==0, args[++i]);
+                            break;
+                        case 's':
+                            submissions = args[++i]; //skips next arg
+                            break;
+                        case 'g':
+                            totalGames = checkInt(x -> x%2==0, args[++i]);
+                            break;
+                        case 'h':
+                            printUsage();
+                            break;
+                        case 'm':
+                            totalMoves = checkInt(x -> x>0, args[++i]);
+                            break;
+                        case 'V':
+                            display = true;
+                            break;
+                        default:
+                            break;
+                    }
             }
-
         }
     }
+
+    private static void printUsage() {
+
+    }
+
 }

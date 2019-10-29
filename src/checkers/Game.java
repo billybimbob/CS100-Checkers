@@ -14,7 +14,7 @@ public class Game {
         display = newDisplay;
         blackPlayer = newBlackPlayer;
         whitePlayer = newWhitePlayer;
-        blackPlayer.setColor(BLACK);
+        blackPlayer.setColor(BLACK); //could have issues with threading
         whitePlayer.setColor(WHITE);
 
         if (newBLACKdepth > 0) BLACKdepth = newBLACKdepth;

@@ -1,0 +1,6 @@
+TeamA
+TeamB
+TeamC
+TeamD
+RandomA
+RandomB
