@@ -18,9 +18,10 @@ public class Tournament extends Play {
     public static void main(String[] args) {
         try {
             parseArgs(args);
-            addSubmissions(submissions);
             if (submissions == null)
                 System.out.println("No submission file given, using default");
+
+            addSubmissions(submissions);
 
             int win1, win2;
             int[] wins;
@@ -81,8 +82,7 @@ public class Tournament extends Play {
                             totalGames = checkInt(x -> x%2==0, args[++i]);
                             break;
                         case 'h':
-                            printUsage();
-                            break;
+                            throw new RuntimeException(); //exit early
                         case 'm':
                             totalMoves = checkInt(x -> x>0, args[++i]);
                             break;
@@ -99,12 +99,12 @@ public class Tournament extends Play {
     private static void printUsage() {
         System.out.println(
             "Usage: java checkers.Play [-hV] [-d <num>] [-g <num>] [-m <num>] -s <file>\n" + 
-            "-h         Print this help message.\n" +
-            "-V         Optional print out board after each move.\n" +
-            "-d <num>   Optional number of depth to search for possible moves.\n" +
-            "-g <num>   Optional number of games played for each match.\n" +
-            "-m <num>   Optional number of moves until a tie is determined.\n" +
-            "-f <file>  Text file of all submissions\n");
+            "\t-h         Print this help message.\n" +
+            "\t-V         Optional print out board after each move.\n" +
+            "\t-d <num>   Optional number of depth to search for possible moves.\n" +
+            "\t-g <num>   Optional number of games played for each match.\n" +
+            "\t-m <num>   Optional number of moves until a tie is determined.\n" +
+            "\t-f <file>  Text file of all submissions\n");
     }
 
 }

@@ -30,9 +30,10 @@ public class Play {
     public static void main(String[] args) {
         try {
             parseArgs(args);
-            addSubmissions();
             if (submissionTest == null)
                 throw new RuntimeException("no submission file given");
+
+            addSubmissions();
 
             String t1 = submissionTest;
             String t2 = teams.get( (int)(Math.random()*teams.size()) );
@@ -81,8 +82,7 @@ public class Play {
                             submissionTest = args[++i]; //skips next arg
                             break;
                         case 'h':
-                            printUsage();
-                            break;
+                            throw new RuntimeException(); //exit early
                         case 'V':
                             display = true;
                             break;
@@ -96,10 +96,10 @@ public class Play {
     private static void printUsage() {
         System.out.println(
             "Usage: java checkers.Play [-hV] [-d <num>] -f <file>\n" + 
-            "-h         Print this help message.\n" +
-            "-V         Optional print out board after each move.\n" +
-            "-d <num>   Optional number of depth to search for possible moves.\n" +
-            "-f <file>  File submission testing\n");
+            "\t-h         Print this help message.\n" +
+            "\t-V         Optional print out board after each move.\n" +
+            "\t-d <num>   Optional number of depth to search for possible moves.\n" +
+            "\t-f <file>  File submission testing\n");
     }
 
     protected static void addSubmissions(String name) throws IOException {
@@ -114,12 +114,15 @@ public class Play {
             }
 
         } catch (FileNotFoundException e) {
-
-            try {
-                if (name!= null) //try using .txt extension
+            
+            if (name != null) {//try using .txt extension
+                try {
                     addSubmissions(name + ".txt");
-            } catch (FileNotFoundException f) {
-                addSubmissions(null);
+                } catch (FileNotFoundException f) {
+                    addSubmissions(null);
+                }
+            } else {
+                throw new IOException(e);
             }
         }
     }

@@ -23,16 +23,20 @@ public abstract class AbstractEvaluator implements Evaluator {
 
     @Override
     public final void setColor(int color) { //must be called before game starts
-        if (color == BLACK) {
-            this.ownChec = BCHEC;
-            this.ownKing = BKING;
-            this.oppChec = WCHEC;
-            this.oppKing = WKING;
+        if (Game.changeColor()) {
+            if (color == BLACK) {
+                this.ownChec = BCHEC;
+                this.ownKing = BKING;
+                this.oppChec = WCHEC;
+                this.oppKing = WKING;
+            } else {
+                this.ownChec = WCHEC;
+                this.ownKing = WKING;
+                this.oppChec = BCHEC;
+                this.oppKing = BKING;
+            }
         } else {
-            this.ownChec = WCHEC;
-            this.ownKing = WKING;
-            this.oppChec = BCHEC;
-            this.oppKing = BKING;
+            System.err.println("cannot change color");
         }
     }
 

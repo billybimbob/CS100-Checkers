@@ -4,6 +4,8 @@ import java.util.List;
 import static checkers.CheckersConstants.*;
 
 public class Game {
+
+    private static boolean changeColor = false;
     private Board b;
     private int BLACKdepth, WHITEdepth;
     private boolean display = false;
@@ -14,14 +16,19 @@ public class Game {
         display = newDisplay;
         blackPlayer = newBlackPlayer;
         whitePlayer = newWhitePlayer;
+
+        changeColor = true; //to control who can set color
         blackPlayer.setColor(BLACK); //could have issues with threading
         whitePlayer.setColor(WHITE);
+        changeColor = false;
 
         if (newBLACKdepth > 0) BLACKdepth = newBLACKdepth;
         else BLACKdepth = 6;
         if (newWHITEdepth > 0) WHITEdepth = newWHITEdepth;
         else WHITEdepth = 6;
     }
+
+    public static boolean changeColor() { return changeColor; }
 
     public void	comp_move(int turn) {
         Move m;
