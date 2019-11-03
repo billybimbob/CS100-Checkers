@@ -111,7 +111,7 @@ public class Tournament extends Play {
     }
 
     private static void printUsage() {
-        System.out.println("Usage: java checkers.Play [-hV] [-d <num>] [-g <num>] [-m <num>] [-s <num>] -f <file>\n"
+        System.out.println("Usage: java -cp <classpath> checkers.Play [-hV] [-d <num>] [-g <num>] [-m <num>] [-s <num>] -f <file>\n"
                 + "\t-h         Print this help message.\n" + "\t-V         Optional print out board after each move.\n"
                 + "\t-d <num>   Optional number of depth to search for possible moves.\n"
                 + "\t-g <num>   Optional number of games played for each match.\n"
