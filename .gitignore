@@ -1,2 +1,4 @@
-/bin/
+/docs/
+*.class
+*.jar
 .vscode

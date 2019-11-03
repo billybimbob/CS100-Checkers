@@ -1,7 +1,7 @@
 package submissions;
 import checkers.AbstractEvaluator;
 
-// Alpha - kings more
+// Alpha - just count
 public class TeamA extends AbstractEvaluator {
     
     /*
@@ -23,10 +23,10 @@ public class TeamA extends AbstractEvaluator {
         for (i=1;i<=8;i++) {
             for (j=1;j<=8;j++) {
                 char spot = board[i][j];
-                if (super.ownChecker(spot)) value=value+3;
-                if (super.ownKing(spot))    value=value+5;
-                if (super.oppChecker(spot)) value=value-3;
-                if (super.oppKing(spot))    value=value-5;
+                if (super.oppChecker(spot)) value=value-1;
+                if (super.oppKing(spot))    value=value-1;
+                if (super.ownChecker(spot)) value=value+1;
+                if (super.ownKing(spot))    value=value+1;
             }
         }
         return value*10+(int)(Math.random()*10);

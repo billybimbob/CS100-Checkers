@@ -8,8 +8,16 @@ interface Evaluator {
      */
     void setColor(int color); //should only be called in Game class
 
+    /**
+     * the name of the creator of Evaluator implementation
+     * @return the name, first and last
+     */
     String getName();
 
+    /**
+     * the lab section of the student
+     * @return the lab number
+     */
     int getSection();
 
     /**

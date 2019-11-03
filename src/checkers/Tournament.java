@@ -5,55 +5,58 @@ import java.io.IOException;
 /**
  * In order to run tournament, 2 requirements are needed:
  * <ol>
- * <li> submission class files located in {@code submissions} package
- * <li> have a submissions.txt file that contains all the submission class
- * file names (without any file extensions or directory path)
+ * <li>submission class files located in {@code submissions} package
+ * <li>have a submissions.txt file that contains all the submission class file
+ * names (without any file extensions or directory path)
  * </ol>
  */
 public class Tournament extends Play {
-    
+
     public static int[][] results;
-    private static String submissions = null;
-    
+    private static String subFile = null;
+    private static int section = -1;
+
     public static void main(String[] args) {
         try {
             parseArgs(args);
-            if (submissions == null)
+            if (subFile == null)
                 System.out.println("No submission file given, using default");
 
-            Play.addSubmissions(submissions);
+            Play.addSubmissions(subFile);
+
+            if (section != 0) filterSubSection();
 
             int win1, win2;
             int[] wins;
 
             results = new int[teams.size()][teams.size()];
 
-            for (int ii=0; ii < teams.size(); ii++) {
-                for (int jj=ii+1; jj < teams.size(); jj++) {
-                    String t1=teams.get(ii);
-                    String t2=teams.get(jj);
+            for (int ii = 0; ii < teams.size(); ii++) {
+                for (int jj = ii + 1; jj < teams.size(); jj++) {
+                    String t1 = teams.get(ii);
+                    String t2 = teams.get(jj);
                     Evaluator[] evals = Play.getEvaluators(t1, t2);
                     Evaluator t1eval = evals[0], t2eval = evals[1];
 
                     wins = Play.playGames(t1eval, t2eval);
-                    win1 = wins[0]; win2 = wins[1];
+                    win1 = wins[0];
+                    win2 = wins[1];
 
                     results[ii][jj] = win1;
                     results[jj][ii] = win2;
                 }
             }
-            
-            for (int ii=0; ii<teams.size(); ii++) {
-                int rowTotal=0;
-                String t1=teams.get(ii);
-                for (int jj=0; jj<teams.size(); jj++) {
-                    rowTotal=rowTotal+results[ii][jj];
-                    System.out.print(results[ii][jj]+"\t");
+
+            for (int ii = 0; ii < teams.size(); ii++) {
+                int rowTotal = 0;
+                String t1 = teams.get(ii);
+                for (int jj = 0; jj < teams.size(); jj++) {
+                    rowTotal = rowTotal + results[ii][jj];
+                    System.out.print(results[ii][jj] + "\t");
                 }
-                System.out.print(t1+" totalWins="+rowTotal+"\n");
+                System.out.print(t1 + " totalWins=" + rowTotal + "\n");
             }
 
-            
         } catch (RuntimeException e) {
             e.printStackTrace();
             printUsage();
@@ -70,41 +73,54 @@ public class Tournament extends Play {
             String arg = args[i];
 
             if (arg.charAt(0) == '-') {
-                for (char letter: arg.toCharArray()) //expect order of args match letter order
-                    switch(letter) {
-                        case 'd':
-                            depth = checkInt(x -> x%2==0, args[++i]);
-                            break;
-                        case 's':
-                            submissions = args[++i]; //skips next arg
-                            break;
-                        case 'g':
-                            totalGames = checkInt(x -> x%2==0, args[++i]);
-                            break;
-                        case 'h':
-                            throw new RuntimeException(); //exit early
-                        case 'm':
-                            totalMoves = checkInt(x -> x>0, args[++i]);
-                            break;
-                        case 'V':
-                            display = true;
-                            break;
-                        default:
-                            break;
+                for (char letter : arg.toCharArray()) // expect order of args match letter order
+                    switch (letter) {
+                    case 'd':
+                        depth = checkInt(x -> x % 2 == 0, args[++i]);
+                        break;
+                    case 'f':
+                        subFile = args[++i]; // skips next arg
+                        break;
+                    case 'g':
+                        totalGames = checkInt(x -> x % 2 == 0, args[++i]);
+                        break;
+                    case 'h':
+                        throw new RuntimeException(); // exit early
+                    case 'm':
+                        totalMoves = checkInt(x -> x > 0, args[++i]);
+                        break;
+                    case 's':
+                        section = checkInt(x -> x > 0, args[++i]);
+                        break;
+                    case 'V':
+                        display = true;
+                        break;
+                    default:
+                        break;
                     }
             }
         }
     }
 
     private static void printUsage() {
-        System.out.println(
-            "Usage: java checkers.Play [-hV] [-d <num>] [-g <num>] [-m <num>] -s <file>\n" + 
-            "\t-h         Print this help message.\n" +
-            "\t-V         Optional print out board after each move.\n" +
-            "\t-d <num>   Optional number of depth to search for possible moves.\n" +
-            "\t-g <num>   Optional number of games played for each match.\n" +
-            "\t-m <num>   Optional number of moves until a tie is determined.\n" +
-            "\t-f <file>  Text file of all submissions\n");
+        System.out.println("Usage: java checkers.Play [-hV] [-d <num>] [-g <num>] [-m <num>] -s <file>\n"
+                + "\t-h         Print this help message.\n" + "\t-V         Optional print out board after each move.\n"
+                + "\t-d <num>   Optional number of depth to search for possible moves.\n"
+                + "\t-g <num>   Optional number of games played for each match.\n"
+                + "\t-m <num>   Optional number of moves until a tie is determined.\n"
+                + "\t-s <num>   Optional number of lab section to filter for"
+                + "\t-f <file>  Text file of all submissions\n");
+    }
+
+    private static void filterSubSection() {
+        Play.teams.stream().filter(file -> { //not sure
+            try {
+                return ((Evaluator) Class.forName("submissions." + file).getConstructor().newInstance())
+                    .getSection() == section;
+            } catch (ReflectiveOperationException e) {
+                return false;
+            }
+        });
     }
 
 }

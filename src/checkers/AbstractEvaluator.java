@@ -1,10 +1,24 @@
 package checkers;
 import static checkers.CheckersConstants.*;
 
+/**
+ * Adds some helper methods for Evaluator;
+ * Helper methods:
+ * <ul>
+ * <li> {@code ownChecker (char tile)} own regular checker pieces
+ * <li> {@code ownKing (char tile)}    own king checker pieces
+ * <li> {@code oppChecker (char tile)} opponent's regular checker pieces
+ * <li> {@code oppKing (char tile)}    opponent's king checker pieces
+ * </ul>
+ */
 public abstract class AbstractEvaluator implements Evaluator {
 
+    /**name of student that created the Evaluator implementation*/
     protected String name;
+
+    /**lab section of student */
     protected int section;
+
     private char ownChec, oppChec;
     private char ownKing, oppKing;
 
@@ -47,7 +61,7 @@ public abstract class AbstractEvaluator implements Evaluator {
     /**
      * checks if tile has a checker that is the same
      * color as the Evaluator's color
-     * @param tile
+     * @param tile tile being checked
      * @return {@code true} tile has a checker piece and is same color
      */
     protected final boolean ownChecker(char tile) { return ownChec == tile; }
@@ -55,7 +69,7 @@ public abstract class AbstractEvaluator implements Evaluator {
     /**
      * checks if tile has a checker that is the not
      * the same color as the Evaluator's color
-     * @param tile
+     * @param tile tile being checked
      * @return {@code true} tile has a checker piece and is different color
      */
     protected final boolean oppChecker(char tile) { return oppChec == tile; }
@@ -63,7 +77,7 @@ public abstract class AbstractEvaluator implements Evaluator {
     /**
      * checks if tile has a king piece that is the same
      * as the Evaluator's color
-     * @param tile
+     * @param tile tile being checked
      * @return {@code true} tile has a king piece and is the same color
      */
     protected final boolean ownKing(char tile) { return ownKing == tile; }
@@ -71,7 +85,7 @@ public abstract class AbstractEvaluator implements Evaluator {
     /**
      * checks if tile has a king piece that is not the
      * same as the Evaluator's color
-     * @param tile
+     * @param tile tile being checked
      * @return {@code true} tile has a king piece and is different color
      */
     protected final boolean oppKing(char tile) { return oppKing == tile; }
