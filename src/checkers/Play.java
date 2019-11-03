@@ -72,26 +72,30 @@ public class Play {
     }
 
     private static void parseArgs(String[] args) throws RuntimeException {
+        try {
         for (int i = 0; i < args.length; i++) {
             String arg = args[i];
             if (arg.charAt(0) == '-') {
                 for (char letter: arg.toCharArray())
                     switch(letter) {
-                        case 'd':
-                            depth = checkInt(x -> x%2==0, args[++i]);
-                            break;
-                        case 'f':
-                            submissionTest = args[++i]; //skips next arg
-                            break;
-                        case 'h':
-                            throw new RuntimeException(); //exit early
-                        case 'V':
-                            display = true;
-                            break;
-                        default:
-                            break;
+                    case 'd':
+                        depth = checkInt(x -> x%2==0, args[++i]);
+                        break;
+                    case 'f':
+                        submissionTest = args[++i]; //skips next arg
+                        break;
+                    case 'h':
+                        throw new RuntimeException(); //exit early
+                    case 'V':
+                        display = true;
+                        break;
+                    default:
+                        break;
                     }
             }
+        }
+        } catch (ArrayIndexOutOfBoundsException e) {
+            throw new RuntimeException("Incorrect positional arg supplied");
         }
     }
 
@@ -104,12 +108,16 @@ public class Play {
             "\t-f <file>  File submission testing\n");
     }
 
-    protected static void addSubmissions(String name) throws IOException {
-        String fileName = name==null
-            ? "default_submissions.txt"
-            : name;
+    protected static void addSubmissions(String name) throws ReflectiveOperationException, IOException {
 
-        try (BufferedReader reader = new BufferedReader(new FileReader(fileName))) {
+        InputStream reading = null; //should be closed with bufferedreader
+        if (name == null) {
+            reading = Play.class.getClassLoader().getResourceAsStream("default_submissions.txt"); 
+        } else {
+            reading = new FileInputStream(name);
+        }
+
+        try (BufferedReader reader = new BufferedReader(new InputStreamReader(reading));) {
             String line;
             while ((line = reader.readLine()) != null) {
                 if (line.split("\\s+").length == 1) //must be one word
@@ -130,7 +138,7 @@ public class Play {
         }
     }
 
-    protected static void addSubmissions() throws IOException {
+    protected static void addSubmissions() throws ReflectiveOperationException, IOException {
         addSubmissions(null);
     }
 
