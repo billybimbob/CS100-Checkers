@@ -107,7 +107,7 @@ public class Play {
             "\t-h         Print this help message.\n" +
             "\t-V         Optional print out board after each move.\n" +
             "\t-d <num>   Optional number of depth to search for possible moves.\n" +
-            "\t-f <file>  File submission testing\n");
+            "\t-f <file>  File submission testing, only include class name\n");
     }
 
     protected static void addSubmissions(String name) throws ReflectiveOperationException, IOException {

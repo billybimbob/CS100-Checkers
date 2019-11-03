@@ -25,6 +25,8 @@ public class Tournament extends Play {
             Play.addSubmissions(subFile);
 
             if (section != 0) filterSubSection();
+            if (teams.size() < 2)
+                throw new RuntimeException("Not enough evaluators in submission file");
 
             int win1, win2;
             int[] wins;
@@ -69,6 +71,7 @@ public class Tournament extends Play {
     }
 
     protected static void parseArgs(String[] args) throws RuntimeException {
+        try {
         for (int i = 0; i < args.length; i++) {
             String arg = args[i];
 
@@ -102,6 +105,9 @@ public class Tournament extends Play {
                     }
             }
         }
+        } catch (ArrayIndexOutOfBoundsException e) {
+            throw new RuntimeException("Incorrect positional arg supplied");
+        }
     }
 
     private static void printUsage() {
@@ -111,7 +117,7 @@ public class Tournament extends Play {
                 + "\t-g <num>   Optional number of games played for each match.\n"
                 + "\t-m <num>   Optional number of moves until a tie is determined.\n"
                 + "\t-s <num>   Optional number of lab section to filter for.\n"
-                + "\t-f <file>  Text file of all submissions\n");
+                + "\t-f <file>  Text file of all submissions, text file should only have class names\n");
     }
 
     private static void filterSubSection() {
