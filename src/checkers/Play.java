@@ -85,7 +85,9 @@ public class Play {
                         submissionTest = args[++i]; //skips next arg
                         break;
                     case 'h':
-                        throw new RuntimeException(); //exit early
+                        printUsage();
+                        System.exit(1); // exit early
+                        break;
                     case 'V':
                         display = true;
                         break;

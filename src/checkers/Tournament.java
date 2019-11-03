@@ -85,7 +85,9 @@ public class Tournament extends Play {
                         totalGames = checkInt(x -> x % 2 == 0, args[++i]);
                         break;
                     case 'h':
-                        throw new RuntimeException(); // exit early
+                        printUsage();
+                        System.exit(1); // exit early
+                        break;
                     case 'm':
                         totalMoves = checkInt(x -> x > 0, args[++i]);
                         break;
@@ -103,12 +105,12 @@ public class Tournament extends Play {
     }
 
     private static void printUsage() {
-        System.out.println("Usage: java checkers.Play [-hV] [-d <num>] [-g <num>] [-m <num>] -s <file>\n"
+        System.out.println("Usage: java checkers.Play [-hV] [-d <num>] [-g <num>] [-m <num>] [-s <num>] -f <file>\n"
                 + "\t-h         Print this help message.\n" + "\t-V         Optional print out board after each move.\n"
                 + "\t-d <num>   Optional number of depth to search for possible moves.\n"
                 + "\t-g <num>   Optional number of games played for each match.\n"
                 + "\t-m <num>   Optional number of moves until a tie is determined.\n"
-                + "\t-s <num>   Optional number of lab section to filter for"
+                + "\t-s <num>   Optional number of lab section to filter for.\n"
                 + "\t-f <file>  Text file of all submissions\n");
     }
 
