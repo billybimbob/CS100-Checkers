@@ -21,7 +21,7 @@ public class Tournament extends Play {
             if (submissions == null)
                 System.out.println("No submission file given, using default");
 
-            addSubmissions(submissions);
+            Play.addSubmissions(submissions);
 
             int win1, win2;
             int[] wins;

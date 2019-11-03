@@ -5,7 +5,7 @@ import static checkers.CheckersConstants.*;
 
 public class Game {
 
-    private static boolean changeColor = false;
+    private static boolean changeColor = false; //not sure
     private Board b;
     private int BLACKdepth, WHITEdepth;
     private boolean display = false;
@@ -30,22 +30,22 @@ public class Game {
 
     public static boolean changeColor() { return changeColor; }
 
-    public void	comp_move(int turn) {
+    public void	compMove(int turn) {
         Move m;
         if (turn == CheckersConstants.BLACK) {
             if (display) {
-                System.out.println("Black move - thinking");
+                System.out.println(blackPlayer.getName() + "(Black) move - thinking");
             }
             m = minmax(turn, BLACKdepth, turn);
         }
         else {
             if (display) {
-                System.out.println("White move - thinking");
+                System.out.println(whitePlayer.getName() + "(White) move - thinking");
             }
             m = minmax(turn, WHITEdepth, turn);
         }
         if (display) System.out.println(m);
-        b.make_move(m);		// make move
+        b.makeMove(m);		// make move
     }
 
     public Move minmax(int whoseMove, int level, int turn) {
@@ -55,10 +55,10 @@ public class Game {
         int best=Integer.MIN_VALUE, current=Integer.MIN_VALUE, worst=Integer.MAX_VALUE;
 
         // get moves for all checkers of player turn
-        possible_moves=b.find_moves(turn);
+        possible_moves=b.findMoves(turn);
         chosenMove=possible_moves.get(0);
         for (Move m : possible_moves) {
-            b.make_move(m);
+            b.makeMove(m);
             // recurse
             current = minmaxR(whoseMove, level-1, -1*turn);
             scores.add(current);
@@ -80,7 +80,7 @@ public class Game {
 //					chosenMove=m;
 //				}
             }
-            b.unmake_move(m);
+            b.unmakeMove(m);
         }
         return chosenMove;
     }
@@ -92,7 +92,7 @@ public class Game {
         //String whiteTeam=whitePlayer.getName();
         int best=Integer.MIN_VALUE, current=Integer.MIN_VALUE, worst=Integer.MAX_VALUE;
 
-        if (b.end_game(turn)) {	// turn player lost
+        if (b.endGame(turn)) {	// turn player lost
             if (whoseMove==turn) return Integer.MIN_VALUE;
             else return Integer.MAX_VALUE;
         }
@@ -112,9 +112,9 @@ public class Game {
 
         else {
             // get moves for all checkers of player turn
-            possible_moves=b.find_moves(turn);
+            possible_moves=b.findMoves(turn);
             for (Move m : possible_moves) {
-                b.make_move(m);
+                b.makeMove(m);
                 current = minmaxR(whoseMove, level-1, -1*turn);
                 scores.add(current);
                 if (whoseMove==turn) {	// maximize level
@@ -125,7 +125,7 @@ public class Game {
                     if (current<worst)  //  || (current==worst && Math.random()>.5)
                         worst=current;
                 }
-                b.unmake_move(m);
+                b.unmakeMove(m);
             }
         }
 

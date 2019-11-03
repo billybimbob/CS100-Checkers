@@ -6,6 +6,7 @@ import static checkers.CheckersConstants.WHITE;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
 import java.util.function.IntPredicate;
 
@@ -26,6 +27,7 @@ public class Play {
     protected static int depth=6, totalGames=4, totalMoves=150;
 
     private static String submissionTest = null;
+    private static Scanner keyboard = new Scanner(System.in);
 
     public static void main(String[] args) {
         try {
@@ -33,10 +35,10 @@ public class Play {
             if (submissionTest == null)
                 throw new RuntimeException("no submission file given");
 
-            addSubmissions();
+            addSubmissions(); //always same submissions
 
             String t1 = submissionTest;
-            String t2 = teams.get( (int)(Math.random()*teams.size()) );
+            String t2 = selectOpponent();
 
             Evaluator[] evals = getEvaluators(t1, t2);
             Evaluator t1eval = evals[0], t2eval = evals[1];
@@ -69,7 +71,7 @@ public class Play {
         }
     }
 
-    protected static void parseArgs(String[] args) throws RuntimeException {
+    private static void parseArgs(String[] args) throws RuntimeException {
         for (int i = 0; i < args.length; i++) {
             String arg = args[i];
             if (arg.charAt(0) == '-') {
@@ -110,7 +112,8 @@ public class Play {
         try (BufferedReader reader = new BufferedReader(new FileReader(fileName))) {
             String line;
             while ((line = reader.readLine()) != null) {
-                teams.add(line); //line should have just file name
+                if (line.split("\\s+").length == 1) //must be one word
+                    teams.add(line); //line should have just file name
             }
 
         } catch (FileNotFoundException e) {
@@ -131,6 +134,21 @@ public class Play {
         addSubmissions(null);
     }
 
+    private static String selectOpponent() {
+        String ret = null;
+        while (ret == null) {
+            System.out.print("Select the difficulty for your opponent"
+                + "\n\tLevel ranges from 1-" + teams.size() + ": ");
+            try {
+                ret = teams.get( Integer.parseInt(keyboard.nextLine())-1 );
+            } catch (RuntimeException e) {
+                System.out.println("Plase enter a valid level");
+            }
+
+        }
+
+        return ret;
+    }
 
     protected static Evaluator[] getEvaluators (String team1, String team2) throws ReflectiveOperationException {
         Evaluator t1eval = (Evaluator) Class.forName("submissions." + team1)
@@ -155,9 +173,9 @@ public class Play {
         int numRounds = totalGames/2;
 
         /* play the game */
-        System.out.println("=============================");
+        System.out.println("\n=============================");
         System.out.println(player1 + " vs. " + player2);
-        System.out.println("=============================");
+        System.out.println("=============================\n");
 
         System.out.println(player1 + "(White) Moves First");
         wins = runGame(numRounds, eval2, eval1);
@@ -169,7 +187,7 @@ public class Play {
         wins = runGame(numRounds, eval1, eval2);
         win1 += wins[1]; win2 += wins[0];
 
-        System.out.println("\nFINAL SCORE: " + player1 + "=" + win1 + "   "+player2+"=" + win2);
+        System.out.println("\n\nFINAL SCORE: " + player1 + "=" + win1 + "   "+player2+"=" + win2);
 
         return new int[] {win1, win2};
     }
@@ -191,21 +209,21 @@ public class Play {
             int counter = 0;
 
             while(counter < totalMoves) {
-                if (b.end_game(WHITE)) {
+                if (b.endGame(WHITE)) {
                     System.out.print(player1 + " Win  ");
                     win1++;
                     break;
                 }
-                g.comp_move(WHITE);
+                g.compMove(WHITE);
                 counter++;
                 if (display) printBoard(b);
 
-                if (b.end_game(BLACK)) {
+                if (b.endGame(BLACK)) {
                     System.out.print(player2 + " Win  ");
                     win2++;
                     break;
                 }
-                g.comp_move(BLACK);
+                g.compMove(BLACK);
                 counter++;
 
                 if (display) printBoard(b);

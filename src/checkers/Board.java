@@ -44,7 +44,7 @@ public class Board {
         return positionCopy;
     }
 
-    public List<Move> find_moves(int turn) {
+    public List<Move> findMoves(int turn) {
         List<Move> allMoves = new ArrayList<Move>();
         boolean jumpExists=false;
 
@@ -53,7 +53,7 @@ public class Board {
         for (int i=1; i<=8; i++){
             for (int j=1; j<=8; j++){
                 if (position[i][j] == check || position[i][j] == king) {
-                    List<Move> oneCheckerMoves = find_moves(i,j);
+                    List<Move> oneCheckerMoves = findMoves(i,j);
                     for (Move item: oneCheckerMoves) {
                         if (item.getJump()) jumpExists=true; 
                         allMoves.add(item);
@@ -72,7 +72,7 @@ public class Board {
         return allMoves;
     }
 
-    public List<Move> find_moves(int row, int col) {
+    public List<Move> findMoves(int row, int col) {
         List<Move> oneCheckerMoves = new ArrayList<Move>();
         Move newMove;
         char piece=position[row][col];
@@ -108,8 +108,8 @@ public class Board {
                                 newMoveKing=true;
                             }
                             newMove=new Move(row, col, row+2*k, col+2*j, true, newMoveKing, check, null);
-                            make_move(newMove);  // should make king if applicable
-                            List<Move> jumpMoves = find_moves(row+2*k, col+2*j);
+                            makeMove(newMove);  // should make king if applicable
+                            List<Move> jumpMoves = findMoves(row+2*k, col+2*j);
                             boolean continuedJump=false;
                             if (!jumpMoves.isEmpty()) { 
                                 Move moveToExtend = new Move(newMove);
@@ -126,7 +126,7 @@ public class Board {
                             if (!continuedJump) {	// no continued jumps
                                 oneCheckerMoves.add(newMove);
                             }
-                            unmake_move(newMove);	// should unmake king if applicable
+                            unmakeMove(newMove);	// should unmake king if applicable
                         }
                     }
                 } // end of jump
@@ -159,8 +159,8 @@ public class Board {
                     if ((row+2*k)>=1 && (row+2*k)<=8 && (col+2*j)>=1 && (col+2*j)<=8 ) {
                         if (position[(row+2*k)][(col+2*j)] == AVAIL){
                             newMove=new Move(row, col, row+2*k, col+2*j, true, false, check, null);
-                            make_move(newMove);  
-                            List<Move> jumpMoves = find_moves(row+2*k, col+2*j);
+                            makeMove(newMove);  
+                            List<Move> jumpMoves = findMoves(row+2*k, col+2*j);
                             boolean continuedJump=false;
                             if (!jumpMoves.isEmpty()) {
                                 Move moveToExtend = new Move(newMove);
@@ -177,7 +177,7 @@ public class Board {
                             if (!continuedJump) {	// no continued jumps
                                 oneCheckerMoves.add(newMove);
                             }
-                            unmake_move(newMove);
+                            unmakeMove(newMove);
                         }
                     }
                 } // end of jump
@@ -186,7 +186,7 @@ public class Board {
         return oneCheckerMoves;
     }
     
-    public void make_move(Move m) {
+    public void makeMove(Move m) {
         do {
             int fx=m.getFromX();
             int fy=m.getFromY();
@@ -214,7 +214,7 @@ public class Board {
         } while (m != null); 
     }	
     
-    public void unmake_move(Move m) {
+    public void unmakeMove(Move m) {
         List<Move> moveList = new ArrayList<>();
         while (m != null) {
             moveList.add(m);
@@ -279,8 +279,8 @@ public class Board {
         return temp;
     }
 
-    public boolean end_game(int player) {
-        List<Move> data=find_moves(player);
+    public boolean endGame(int player) {
+        List<Move> data=findMoves(player);
         if (data.isEmpty()) return true;
         else return false;
     }

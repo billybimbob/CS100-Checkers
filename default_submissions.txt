@@ -1,6 +1,7 @@
+#order of the names matter
+RandomA
+RandomB
 TeamA
 TeamB
 TeamC
 TeamD
-RandomA
-RandomB
