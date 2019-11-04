@@ -1,13 +1,13 @@
 # CS100-Checkers
 
-Repository to help me synchronize changes that I make.
+Repository to help me synchronize changes that I make to the CS 100 Checkers project.
 
 # Info on Use
 
-Some information on how the checkers program is intended to run
-Words surrounded with * are meant to be relative to person using, and not the actual text
+Below is some information on how the checkers program is intended to run.
+Words surrounded with * are meant to be relative to person using, and not the actual text.
 
-## Programs Locations
+## Program Locations
 
 ### Running Tournament
 
@@ -19,12 +19,12 @@ Words surrounded with * are meant to be relative to person using, and not the ac
 
 ## Using Eclipse
 
-To load the project to Eclipse, assuming the files are unzipped:
-1. Open Eclipse, and click on the 'File' option at the top right
+Assuming the files are unzipped, to load the project to Eclipse:
+1. Open Eclipse, and click on the 'File' option at the top left
 2. Click the 'Open Projects from File System...' option near the top
-3. Close to the top right, click the 'Directory' option
-4. Navigate to the folder location where the unzipped files are located
-5. Click 'Finish' on the bottom right of the window
+3. Near the top right of the dialog box, click the 'Directory' option
+4. Navigate to the folder location where the unzipped files are
+5. Click 'Finish' at the bottom right of the window
 
 ### Compiling
 
@@ -35,7 +35,7 @@ so compiling should be automatically set up when opening the project in Eclipse
 
 #### To run, a new run configuration must be added
 
-1. On the top, click the small down arrow to the right of the green run button
+1. At the top, click the small down arrow to the right of the green run button
 2. Near the top left, click the 'New launch configuration'
 3. In the 'Main' tab, enter in one of the Program Locations in the 'Main class' text box
 4. In the 'Arguments' tab, enter in the program arguments in the 'Program arguments' tab
@@ -60,6 +60,6 @@ so compiling should be automatically set up when opening the project in Eclipse
 
 ### On Windows
 
-Replace the colon characters `:` with the semicolor `;`  e.g.
+Replace the colon characters `:` with semicolons `;`  e.g.
 
 `java -cp "bin;lib/playcheckers.jar" *Program Location* *program args*`
