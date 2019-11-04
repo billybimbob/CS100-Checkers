@@ -1,12 +1,12 @@
 # CS100-Checkers
 
 This is a repository to help me synchronize changes that I make to the CS 100 Checkers project.
-The **Info on Use** section only applies to a version of this project that has all the 
+The **Info On Use** section only applies to a version of this project that has all the
 class files and documentation in a `playcheckers.jar` file. Most of the topics below can
-apply to this version, but the classpath specified at the terminal and as well in the 
+apply to this version, but the classpath specified at the terminal and as well in the
 .classpath file are different.
 
-# Info on Use
+## Info On Use
 
 Below is some information on how the checkers program is intended to run.
 Words surrounded with * are meant to be relative to person using, and not the actual text.
@@ -24,6 +24,7 @@ Words surrounded with * are meant to be relative to person using, and not the ac
 ## Using Eclipse
 
 Assuming the files are unzipped, to load the project to Eclipse:
+
 1. Open Eclipse, and click on the 'File' option at the top left
 2. Click the 'Open Projects from File System...' option near the top
 3. Near the top right of the dialog box, click the 'Directory' option
