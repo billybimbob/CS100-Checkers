@@ -1,6 +1,10 @@
 # CS100-Checkers
 
-Repository to help me synchronize changes that I make to the CS 100 Checkers project.
+This is a repository to help me synchronize changes that I make to the CS 100 Checkers project.
+The **Info on Use** section only applies to a version of this project that has all the 
+class files and documentation in a `playcheckers.jar` file. Most of the topics below can
+apply to this version, but the classpath specified at the terminal and as well in the 
+.classpath file are different.
 
 # Info on Use
 
