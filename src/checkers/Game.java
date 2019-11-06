@@ -49,18 +49,18 @@ public class Game {
     }
 
     public Move minmax(int whoseMove, int level, int turn) {
-        List<Move> possible_moves;
+        List<Move> possibleMoves;
         List<Integer> scores = new ArrayList<>();
         Move chosenMove;
         int best=Integer.MIN_VALUE, current=Integer.MIN_VALUE, worst=Integer.MAX_VALUE;
 
         // get moves for all checkers of player turn
-        possible_moves=b.findMoves(turn);
-        chosenMove=possible_moves.get(0);
-        for (Move m : possible_moves) {
+        possibleMoves=b.findMoves(turn);
+        chosenMove=possibleMoves.get(0);
+        for (Move m : possibleMoves) {
             b.makeMove(m);
             // recurse
-            current = -minmaxR(whoseMove, level-1, -1*turn); //temporary fix, try to find later
+            current = minmaxR(whoseMove, level-1, -1*turn);
             scores.add(current);
             if (whoseMove==turn) {	// maximize level
                 if (current>best) {
@@ -72,7 +72,6 @@ public class Game {
 //				}
             }
             else {		// minimize level
-                System.out.println("checking min");
                 if (current<worst) {
                     worst=current;
                     chosenMove=m;

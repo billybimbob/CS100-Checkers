@@ -64,7 +64,7 @@ public class Play {
             if (check.test(value))
                 return value;
             else
-                throw new RuntimeException("Invalid arguements");
+                throw new RuntimeException("Invalid argument of " + check);
 
         } catch (NumberFormatException e) {
             throw new RuntimeException("Argument expected an integer");
@@ -106,7 +106,7 @@ public class Play {
             "Usage: java -cp <classpath> checkers.Play [-hV] [-d <num>] -f <file>\n" + 
             "\t-h         Print this help message.\n" +
             "\t-V         Optional print out board after each move.\n" +
-            "\t-d <num>   Optional number of depth to search for possible moves.\n" +
+            "\t-d <num>   Optional number of depth to search for possible moves. Must be even.\n" +
             "\t-f <file>  File submission testing, only include class name\n");
     }
 
@@ -220,8 +220,8 @@ public class Play {
 
             while(counter < totalMoves) {
                 if (b.endGame(WHITE)) {
-                    System.out.print(player1 + " Win  ");
-                    win1++;
+                    System.out.print(player2 + " Win  ");
+                    win2++;
                     break;
                 }
                 g.compMove(WHITE);
@@ -229,8 +229,8 @@ public class Play {
                 if (display) printBoard(b);
 
                 if (b.endGame(BLACK)) {
-                    System.out.print(player2 + " Win  ");
-                    win2++;
+                    System.out.print(player1 + " Win  ");
+                    win1++;
                     break;
                 }
                 g.compMove(BLACK);
