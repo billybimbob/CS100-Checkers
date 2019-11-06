@@ -32,7 +32,7 @@ public class Game {
 
     public void	compMove(int turn) {
         Move m;
-        if (turn == CheckersConstants.BLACK) {
+        if (turn == BLACK) {
             if (display) {
                 System.out.println(blackPlayer.getName() + "(Black) move - thinking");
             }
@@ -60,7 +60,7 @@ public class Game {
         for (Move m : possible_moves) {
             b.makeMove(m);
             // recurse
-            current = minmaxR(whoseMove, level-1, -1*turn);
+            current = -minmaxR(whoseMove, level-1, -1*turn); //temporary fix, try to find later
             scores.add(current);
             if (whoseMove==turn) {	// maximize level
                 if (current>best) {
@@ -72,6 +72,7 @@ public class Game {
 //				}
             }
             else {		// minimize level
+                System.out.println("checking min");
                 if (current<worst) {
                     worst=current;
                     chosenMove=m;
@@ -86,7 +87,7 @@ public class Game {
     }
 
     public int minmaxR(int whoseMove, int level, int turn) {
-        List<Move> possible_moves;
+        List<Move> possibleMoves;
         List<Integer> scores = new ArrayList<>();
         //String blackTeam=blackPlayer.getName();
         //String whiteTeam=whitePlayer.getName();
@@ -112,8 +113,8 @@ public class Game {
 
         else {
             // get moves for all checkers of player turn
-            possible_moves=b.findMoves(turn);
-            for (Move m : possible_moves) {
+            possibleMoves=b.findMoves(turn);
+            for (Move m : possibleMoves) {
                 b.makeMove(m);
                 current = minmaxR(whoseMove, level-1, -1*turn);
                 scores.add(current);
