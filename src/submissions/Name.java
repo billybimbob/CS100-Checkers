@@ -37,18 +37,7 @@ public class Name extends AbstractEvaluator {
 
     @Override
     public int evaluateBoard(char [][] board) {
-        /*
-        StringBuilder build = new StringBuilder("board state");
-        for (char[] row: board) {
-            build.append('\n');
-            for (char val: row)
-                build.append(val);
-        }
-        build.append('\n');
-        System.out.println(build.toString());
-        */
-        //change the code here
-
+        
         //example of helper function use
         if (ownChecker(board[0][0]) == true) {
              //spot (0, 0) of the board has evaluator's color if true
