@@ -67,7 +67,7 @@ public class Play {
                 throw new RuntimeException("Invalid arguements");
 
         } catch (NumberFormatException e) {
-            throw new RuntimeException(e);
+            throw new RuntimeException("Argument expected an integer");
         }
     }
 

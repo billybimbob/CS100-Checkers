@@ -101,13 +101,13 @@ public class Game {
 
         if (level == 0) {
             if (whoseMove==BLACK && whoseMove==turn)
-                return blackPlayer.evaluateBoard(b.BoardCopy());
+                return blackPlayer.evaluateBoard(b.BoardCopy(BLACK));
             else if (whoseMove==BLACK && whoseMove!=turn)
-                return whitePlayer.evaluateBoard(b.BoardCopy());
+                return whitePlayer.evaluateBoard(b.BoardCopy(WHITE));
             else if (whoseMove==WHITE && whoseMove==turn)
-                return whitePlayer.evaluateBoard(b.BoardCopy());
+                return whitePlayer.evaluateBoard(b.BoardCopy(WHITE));
             else
-                return blackPlayer.evaluateBoard(b.BoardCopy());
+                return blackPlayer.evaluateBoard(b.BoardCopy(BLACK));
         }
 
         else {

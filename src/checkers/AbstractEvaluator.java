@@ -3,20 +3,23 @@ import static checkers.CheckersConstants.*;
 
 /**
  * Adds some helper methods for Evaluator;
- * Helper methods:
+ * <p> Each method takes in one spot on the board, and returns a 
+ * boolean {@code true} based on if the info checking is valid for 
+ * that specific tile; </p>
+ * <p> Helper methods: </p>
  * <ul>
- * <li> {@code ownChecker (char tile)} own regular checker pieces
- * <li> {@code ownKing (char tile)}    own king checker pieces
- * <li> {@code oppChecker (char tile)} opponent's regular checker pieces
- * <li> {@code oppKing (char tile)}    opponent's king checker pieces
+ * <li> {@code ownChecker(char tile)}: own regular checker pieces
+ * <li> {@code ownKing(char tile)}:    own king checker pieces
+ * <li> {@code oppChecker(char tile)}: opponent's regular checker pieces
+ * <li> {@code oppKing(char tile)}:    opponent's king checker pieces
  * </ul>
  */
 public abstract class AbstractEvaluator implements Evaluator {
 
-    /**name of student that created the Evaluator implementation*/
+    /**team name of Evaluator implementation*/
     protected String name;
 
-    /**lab section of student */
+    /**lab section of student(s) */
     protected int section;
 
     private char ownChec, oppChec;

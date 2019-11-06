@@ -23,7 +23,7 @@ public class Board {
                 position[i+1][j] = OUT;
             }
 
-        // initial checker positions
+        // initial checker positions, white is at the bottom row
         for (int j=2;j<=8;j+=2) {
             position[1][j]   = WCHEC;	// white
             position[2][j-1] = WCHEC;	// white
@@ -36,11 +36,15 @@ public class Board {
         }
     }
     
-    public char [][] BoardCopy() {
+    public char [][] BoardCopy(int color) {
         char [][] positionCopy = new char[10][10];
-        for (int i=0;i<=9;i++) 
-            for (int j=0;j<=9;j++) 
-                positionCopy[i][i]=position[i][j];
+     
+        for (int i=0; i<=9; i++)
+            for (int j=0; j<=9; j++)
+                positionCopy[i][j] = color==BLACK //flip board if black
+                    ? position[9-i][j]
+                    : position[i][j];
+
         return positionCopy;
     }
 
@@ -259,24 +263,24 @@ public class Board {
         return count;
     }
     
-    public String toString( ) {	
-        String temp = "\t1\t2\t3\t4\t5\t6\t7\t8\n";
+    public String toString( ) {
+        StringBuilder temp = new StringBuilder("\t1\t2\t3\t4\t5\t6\t7\t8\n");
         for (int i=1;i<=8;i++){
-            temp=temp+i+"\t";
+            temp.append(i+"\t");
             for (int j=1;j<=8;j++){
             // display coresponding figures
                 switch (position[i][j]){
-                    case WCHEC: temp=temp+"W\t"; break;
-                    case WKING: temp=temp+"WK\t"; break;
-                    case BCHEC: temp=temp+"B\t"; break;
-                    case BKING: temp=temp+"BK\t"; break;
-                    case AVAIL: temp=temp+".\t"; break;
-                    case OUT:   temp=temp+"\t"; break;
+                    case WCHEC: temp.append("W\t");  break;
+                    case WKING: temp.append("WK\t"); break;
+                    case BCHEC: temp.append("B\t");  break;
+                    case BKING: temp.append("BK\t"); break;
+                    case AVAIL: temp.append(".\t");  break;
+                    case OUT:   temp.append("\t");   break;
                 }
             }
-            temp=temp+"\n";
+            temp.append("\n");
         }
-        return temp;
+        return temp.toString();
     }
 
     public boolean endGame(int player) {
