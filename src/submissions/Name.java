@@ -37,7 +37,7 @@ public class Name extends AbstractEvaluator {
 
     @Override
     public int evaluateBoard(char [][] board) {
-        
+
         //example of helper function use
         if (ownChecker(board[0][0]) == true) {
              //spot (0, 0) of the board has evaluator's color if true

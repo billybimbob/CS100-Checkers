@@ -30,6 +30,13 @@ public class Game {
 
     public static boolean changeColor() { return changeColor; }
 
+    public int invokeEvaluator(int color) {
+        Evaluator invoking = color == BLACK
+            ? blackPlayer
+            : whitePlayer;
+        return invoking.evaluateBoard(b.BoardCopy(color));
+    }
+
     public void	compMove(int turn) {
         Move m;
         if (turn == BLACK) {
@@ -101,13 +108,13 @@ public class Game {
 
         if (level == 0) {
             if (whoseMove==BLACK && whoseMove==turn)
-                return blackPlayer.evaluateBoard(b.BoardCopy(BLACK));
+                return invokeEvaluator(BLACK);
             else if (whoseMove==BLACK && whoseMove!=turn)
-                return whitePlayer.evaluateBoard(b.BoardCopy(WHITE));
+                return invokeEvaluator(WHITE);
             else if (whoseMove==WHITE && whoseMove==turn)
-                return whitePlayer.evaluateBoard(b.BoardCopy(WHITE));
+                return invokeEvaluator(WHITE);
             else
-                return blackPlayer.evaluateBoard(b.BoardCopy(BLACK));
+                return invokeEvaluator(BLACK);
         }
 
         else {

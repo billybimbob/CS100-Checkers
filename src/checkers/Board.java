@@ -42,7 +42,7 @@ public class Board {
         for (int i=0; i<=9; i++)
             for (int j=0; j<=9; j++)
                 positionCopy[i][j] = color==BLACK //flip board if black
-                    ? position[9-i][j]
+                    ? position[9-i][9-j]
                     : position[i][j];
 
         return positionCopy;
