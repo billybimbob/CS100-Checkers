@@ -9,7 +9,7 @@ import checkers.AbstractEvaluator;
  */
 public class Name extends AbstractEvaluator {
 
-    /**
+    /*
      * Helper methods:
      * Each method listed here take in one spot on the board (a char), and
      * returns a boolean (true or false) based on if the info checking is
@@ -29,7 +29,7 @@ public class Name extends AbstractEvaluator {
         super.section = -1;  //set equal to lab section
     }
 
-    /**
+    /*
      * Board layout
      * Rows close to row 0 is Evaluator's
      * side of the board, while close to row 9 is the opponenent's

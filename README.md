@@ -6,20 +6,42 @@ class files and documentation in a `playcheckers.jar` file. Most of the topics b
 apply to this version, but the classpath specified at the terminal and as well in the
 .classpath file are different.
 
-## Info On Use
-
 Below is some information on how the checkers program is intended to run.
 Words surrounded with * are meant to be relative to person using, and not the actual text.
 
 ## Program Locations
 
-### Running Tournament
+The locations listed are the different programs to run, and one should be specified when calling
+the `java` command.
+
+### Tournament
+
+The Tournament will run multiple Evaluator submissions in a round robin tournament, where all
+submissions will face against each other. The winner is the Evaluator with the most amount of
+wins in the end.
 
 `checkers.Tournament`
 
-### Running Student Play
+The program arguements are specified when running the program, but there are
+some extra requirements on the submission file in order to run correctly:
+
+1. A text file that contains all Evaluators participating in the tournament
+    * The text file should include the name of the Evaluator class names (case sensitive)
+    * Each class name should be on its own line
+2. Submission class files listed in the text file
+    * The class files must be located in the directory `bin/submissions`
+
+### Student Play
+
+The Student Play is the program intended for the students to run. The students will run this
+program to test a signle Evaluator implementation against predefined Evaluators.
 
 `checkers.Play`
+
+## Setting Up/Running
+
+Regardless of the program being intended to run, the set up process is the same. Below are
+steps to compile and run in either Eclipse or with a terminal.
 
 ## Using Eclipse
 
@@ -42,7 +64,7 @@ so compiling should be automatically set up when opening the project in Eclipse
 
 1. At the top, click the small down arrow to the right of the green run button
 2. Near the top left, click the 'New launch configuration'
-3. In the 'Main' tab, enter in one of the Program Locations in the 'Main class' text box
+3. In the 'Main' tab, enter in one of the Program Locations listed above in the 'Main class' text box
 4. In the 'Arguments' tab, enter in the program arguments in the 'Program arguments' tab
     * The exact arguements are specified in the programs, or can be shown by adding the `-h` argument
     * These arguments can be changed any time afterwards by just going through the same steps as before
@@ -54,6 +76,8 @@ so compiling should be automatically set up when opening the project in Eclipse
 
 1. After unzipping the files to a location, change the directory to that unzipped location
 2. Enter to commands below to compile/run
+    * The program location is one of locatiosn listed above in the **Program Locations** section
+    * The exact program arguements are specified in the programs, or can be shown by adding the `-h` argument
 
 ### Compile Command
 

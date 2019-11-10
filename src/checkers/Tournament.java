@@ -15,7 +15,7 @@ public class Tournament extends Play {
 
     public static int[][] results;
     private static String subFile = null;
-    private static int section = -1;
+    private static int section = 0;
 
     public static void main(String[] args) {
         try {

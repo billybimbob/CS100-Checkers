@@ -1,7 +1,7 @@
 package submissions;
 import checkers.AbstractEvaluator;
 
-// Alpha - just count
+/** Alpha - just count */
 public class TeamA extends AbstractEvaluator {
     
     /*

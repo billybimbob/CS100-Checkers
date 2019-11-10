@@ -1,7 +1,7 @@
 package submissions;
 import checkers.AbstractEvaluator;
 
-// Charlie - kings more and sides on other side more
+/** Charlie - kings more and sides on other side more */
 public class TeamC extends AbstractEvaluator {
 
     /*

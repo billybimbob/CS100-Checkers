@@ -1,7 +1,7 @@
 package submissions;
 import checkers.AbstractEvaluator;
 
-//Delta - kings more and regular pieces getting closer to kings are worth more
+/** Delta - kings more and regular pieces getting closer to kings are worth more */
 public class TeamD extends AbstractEvaluator {
 
     /*

@@ -183,17 +183,20 @@ public class Play {
         int numRounds = totalGames/2;
 
         /* play the game */
-        System.out.println("\n=============================");
-        System.out.println(player1 + " vs. " + player2);
-        System.out.println("=============================\n");
+        StringBuilder prompt = new StringBuilder("\n=============================");
+        prompt.append(player1 + " vs. " + player2);
+        prompt.append("=============================\n");
+        prompt.append(player1 + "(White) Moves First");
 
-        System.out.println(player1 + "(White) Moves First");
+        System.out.println(prompt.toString());
         wins = runGame(numRounds, eval2, eval1);
         win1 += wins[0]; win2 += wins[1];
 
-        System.out.println("\n\nHALFTIME: "+player1+"="+win1+"   "+player2+"="+win2);
+        prompt.setLength(0); //clear
+        prompt.append("\n\nHALFTIME: "+player1+"="+win1+"   "+player2+"="+win2);
+        prompt.append("\n"+player2 + "(White) Moves First");
 
-        System.out.println("\n"+player2 + "(White) Moves First");
+        System.out.println(prompt.toString());
         wins = runGame(numRounds, eval1, eval2);
         win1 += wins[1]; win2 += wins[0];
 

@@ -1,7 +1,7 @@
 package submissions;
 import checkers.AbstractEvaluator;
 
-// Bravo - kings more
+/** Bravo - kings more */
 public class TeamB extends AbstractEvaluator {
     
     /*
