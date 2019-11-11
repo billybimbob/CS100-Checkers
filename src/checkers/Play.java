@@ -111,32 +111,34 @@ public class Play {
     }
 
     protected static void addSubmissions(String name) throws ReflectiveOperationException, IOException {
-
-        InputStream reading = null; //should be closed with bufferedreader
-        if (name == null) {
-            reading = Play.class.getClassLoader().getResourceAsStream("default_submissions.txt"); 
-        } else {
-            reading = new FileInputStream(name);
-        }
-
-        try (BufferedReader reader = new BufferedReader(new InputStreamReader(reading));) {
+        InputStream reading = null;
+        boolean defltRead = name==null; //to get rid of warning
+        try {
+            reading = defltRead
+                ? Play.class.getClassLoader().getResourceAsStream("default_submissions.txt")
+                : new FileInputStream(name);
+            
+            BufferedReader reader = new BufferedReader(new InputStreamReader(reading));
             String line;
+
             while ((line = reader.readLine()) != null) {
                 if (line.split("\\s+").length == 1) //must be one word
                     teams.add(line); //line should have just file name
             }
 
         } catch (FileNotFoundException e) {
-            
-            if (name != null) {//try using .txt extension
-                try {
-                    addSubmissions(name + ".txt");
-                } catch (FileNotFoundException f) {
-                    addSubmissions(null);
-                }
-            } else {
+            if (defltRead)
                 throw new IOException(e);
+            else if (!name.contains(".")) //try using .txt extension
+                addSubmissions(name + ".txt");
+            else {
+                addSubmissions(null);
+                System.out.println("File not found, using default");
             }
+
+        } finally {
+            if (reading != null)
+                reading.close();
         }
     }
 
