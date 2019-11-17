@@ -122,8 +122,11 @@ public class Play {
             String line;
 
             while ((line = reader.readLine()) != null) {
-                if (line.split("\\s+").length == 1) //must be one word
+                if (line.split("\\s+").length == 1) { //must be one word
+                    line = line.replace(".java", "");
+                    line = line.replace(".class", "");
                     teams.add(line); //line should have just file name
+                }
             }
 
         } catch (FileNotFoundException e) {
