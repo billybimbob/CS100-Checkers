@@ -218,8 +218,8 @@ public class Play {
     protected static int[] runGame(int numGames, Evaluator black, Evaluator white)
     {
         int win1 = 0, win2 = 0;
-        String player1 = white.getName(); //player 1 goes first
-        String player2 = black.getName();
+        String player1 = white.getName(), player2 = black.getName(); //player 1 goes first
+        String win1Prompt = player1 + " Win  ", win2Prompt = player2 + " Win  ";
 
         for (int i=0; i < numGames; i++) {
             Board b = new Board();
@@ -228,8 +228,8 @@ public class Play {
 
             while(counter < totalMoves) {
                 if (b.endGame(WHITE)) {
-                    System.out.print(player2 + " Win  ");
                     win2++;
+                    System.out.print(win2Prompt);
                     break;
                 }
                 g.compMove(WHITE);
@@ -237,8 +237,8 @@ public class Play {
                 if (display) printBoard(b);
 
                 if (b.endGame(BLACK)) {
-                    System.out.print(player1 + " Win  ");
                     win1++;
+                    System.out.print(win1Prompt);
                     break;
                 }
                 g.compMove(BLACK);
@@ -247,22 +247,32 @@ public class Play {
                 if (display) printBoard(b);
             }
 
-            if (counter==totalMoves)
-                System.out.print("Tie:"
-                    + player2 + "(" + b.checkerCount(BLACK) + ")"
-                    + player1 + "(" + b.checkerCount(WHITE) + ")  ");
+            //early exit; check checker counts
+            if (counter==totalMoves) {
+                int bCount = b.checkerCount(BLACK);
+                int wCount = b.checkerCount(WHITE);
+                System.out.println("Count of checkers:" 
+                    + player2 + "(" + bCount + ")" 
+                    + player1 + "(" + wCount + ")  ");
+                if (wCount > bCount) {
+                    win1++;
+                    System.out.print(win1Prompt);
+                } else if (wCount < bCount) {
+                    win2++;
+                    System.out.print(win2Prompt);
+                } else
+                    System.out.print("Tie  ");
+            }
         }
 
         return new int[] {win1, win2};
     }
 
-
-
     private static void printBoard(Board board) {
         try {
             //System.out.print(String.format("\033[2J"));
             System.out.println(board);
-            TimeUnit.SECONDS.sleep(1);
+            TimeUnit.MILLISECONDS.sleep(500);
             
         } catch (InterruptedException e) {
             System.err.println("Interrupted");
