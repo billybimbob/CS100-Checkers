@@ -1,10 +1,10 @@
 # CS100-Checkers
 
 This is a repository to help me synchronize changes that I make to the CS 100 Checkers project.
-The **Info On Use** section only applies to a version of this project that has all the
-class files and documentation in a `playcheckers.jar` file. Most of the topics below can
+The **Using the Terminal** section only applies to a version of this project that has all the
+class files and documentation in a `playcheckers.jar` file. Most of the other topics below can
 apply to this version, but the classpath specified at the terminal and as well in the
-.classpath file are different.
+`.classpath` file are different.
 
 Below is some information on how the checkers program is intended to run.
 Words surrounded with * are meant to be relative to person using, and not the actual text.
