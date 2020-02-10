@@ -16,13 +16,13 @@ the `java` command.
 
 ### Tournament
 
+`checkers.Tournament`
+
 The Tournament will run multiple Evaluator submissions in a round robin tournament, where all
 submissions will face against each other. The winner is the Evaluator with the most amount of
 wins in the end.
 
-`checkers.Tournament`
-
-The program arguements are specified when running the program, but there are
+The program arguments are specified when running the program, but there are
 some extra requirements on the submission file in order to run correctly:
 
 1. A text file that contains all Evaluators participating in the tournament
@@ -33,17 +33,17 @@ some extra requirements on the submission file in order to run correctly:
 
 ### Student Play
 
-The Student Play is the program intended for the students to run. The students will run this
-program to test a signle Evaluator implementation against predefined Evaluators.
-
 `checkers.Play`
+
+The Student Play is the program intended for the students to run. The students will run this
+program to test a single Evaluator implementation against predefined Evaluators.
 
 ## Setting Up/Running
 
 Regardless of the program being intended to run, the set up process is the same. Below are
 steps to compile and run in either Eclipse or with a terminal.
 
-## Using Eclipse
+### Using Eclipse
 
 Assuming the files are unzipped, to load the project to Eclipse:
 
@@ -53,14 +53,14 @@ Assuming the files are unzipped, to load the project to Eclipse:
 4. Navigate to the folder location where the unzipped files are
 5. Click 'Finish' at the bottom right of the window
 
-### Compiling
+#### Compiling
 
 The classpath file should be set up to already have all the libraries and documentation included,
 so compiling should be automatically set up when opening the project in Eclipse
 
-### Running
+#### Running
 
-#### To run, a new run configuration must be added
+##### To run, a new run configuration must be added
 
 1. At the top, click the small down arrow to the right of the green run button
 2. Near the top left, click the 'New launch configuration'
@@ -72,22 +72,22 @@ so compiling should be automatically set up when opening the project in Eclipse
 5. Click either 'Run' or 'Apply' and 'Close'
 6. Now to run, the green run button can just be used
 
-## Using the Terminal
+### Using the Terminal
 
 1. After unzipping the files to a location, change the directory to that unzipped location
 2. Enter to commands below to compile/run
     * The program location is one of locatiosn listed above in the **Program Locations** section
     * The exact program arguements are specified in the programs, or can be shown by adding the `-h` argument
 
-### Compile Command
+#### Compile Command
 
 `javac -d bin -cp "src:lib/playcheckers.jar" src/submissions/*YourEval*.java`
 
-### Run Command
+#### Run Command
 
 `java -cp "bin:lib/playcheckers.jar" *Program Location* *program args*`
 
-### On Windows
+#### On Windows
 
 Replace the colon characters `:` with semicolons `;`  e.g.
 
